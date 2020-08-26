@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- overlayScrollbars -->
+@yield('css')
+<!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -87,7 +88,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../gallery.html" class="nav-link">
+                        <a href="{{ route('users.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 User Management
@@ -196,8 +197,9 @@
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+@yield('js')
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-
+@yield('script')
 </body>
 </html>
