@@ -4,13 +4,12 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 @endsection
 
 @section('content')
     <div class="container-fluid">
-        <div>
-
-        </div>
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -44,19 +43,21 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->profile }}</td>
-                                    <td>{{ $user->photo }}</td>
+                                    <td>
+                                        <img alt="Avatar" class="table-avatar" width="40" height="40" src="{{ asset($user->photo) }}">
+                                    </td>
                                     <td>{{ $user->status }}</td>
                                     <td>{{ $user->created_at->diffForHumans() }}</td>
                                     <td>
                                         <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
                                                 data-toggle="dropdown" aria-expanded="false">
                                             <span class="sr-only">Toggle Dropdown</span>
-                                            <div class="dropdown-menu" role="menu" style="">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
                                         </button>
+                                        <div class="dropdown-menu" role="menu" style="">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -92,6 +93,8 @@
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <!-- Toastr -->
+    <script src="../../plugins/toastr/toastr.min.js"></script>
 @endsection
 
 @section('script')
@@ -105,5 +108,10 @@
                 },
             });
         });
+
+        @if(session('status'))
+            toastr.success('{{ session('status') }}')
+        @endif
+
     </script>
 @endsection

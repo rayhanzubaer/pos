@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -21,22 +23,35 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  StoreUserRequest  $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest  $request)
     {
-        //
+        $file = $request->file('photo');
+        $path = $file->storeAs('uploads', $file->getCTime(). '_' . $file->getClientOriginalName());
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'profile' => $request->profile,
+            'photo' => $path,
+        ]);
+
+        session()->flash('status', 'User created successfully');
+
+        return redirect()->route('users.index');
     }
 
     /**
