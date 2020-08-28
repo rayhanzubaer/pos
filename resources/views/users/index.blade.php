@@ -56,7 +56,13 @@
                                         <div class="dropdown-menu" role="menu" style="">
                                             <a class="dropdown-item" href="{{ route('users.edit', ['user' => $user]) }}">Edit</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Delete</a>
+                                            <div class="dropdown-item">
+                                                <form action="{{ route('users.destroy', ['user' => $user]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
