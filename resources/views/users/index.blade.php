@@ -54,13 +54,19 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu" role="menu" style="">
-                                            <a class="dropdown-item" href="{{ route('users.edit', ['user' => $user]) }}">Edit</a>
+                                            <div class="dropdown-item text-center">
+                                                <a class="btn btn-outline-warning text-bold" title="Edit" href="{{ route('users.edit', ['user' => $user]) }}">
+                                                    <i class="fas fa-pen"></i>
+                                                </a>
+                                            </div>
                                             <div class="dropdown-divider"></div>
-                                            <div class="dropdown-item">
+                                            <div class="dropdown-item text-center">
                                                 <form action="{{ route('users.destroy', ['user' => $user]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                                    <button type="submit" title="Delete" class="btn btn-outline-danger text-bold">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
