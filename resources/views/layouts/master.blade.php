@@ -104,7 +104,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../gallery.html" class="nav-link">
+                        <a href="{{ route('products.index') }}" class="nav-link">
                             <i class="nav-icon fab fa-product-hunt"></i>
                             <p>
                                 Products
