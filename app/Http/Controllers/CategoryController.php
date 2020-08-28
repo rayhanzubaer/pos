@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -21,22 +23,28 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  CategoryRequest  $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        Category::create([
+            'name' => $request->name,
+        ]);
+
+        session()->flash('status', 'Category created successfully');
+
+        return redirect()->route('categories.index');
     }
 
     /**
