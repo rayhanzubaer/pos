@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -57,35 +57,54 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User $user
+     * @return null
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return null;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit')->with('user', $user);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  UpdateUserRequest  $request
+     * @param  User  $user
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'profile' => $request->profile,
+        ]);
+
+
+        if (!is_null($request->file('photo'))) {
+            $file = $request->file('photo');
+            $filename = $file->getCTime() . '_' . $file->getClientOriginalName();
+            echo $filename;
+            $path = $file->storeAs('uploads', $filename);
+            $user->update([
+                'photo' => $path
+            ]);
+        }
+
+        session()->flash('status', 'User update successfully');
+
+        return redirect()->route('users.index');
     }
 
     /**

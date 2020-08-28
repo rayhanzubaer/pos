@@ -9,13 +9,14 @@
                         <h3 class="card-title">Create New User</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('users.update', ['user' => $user]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PATCH')
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" id="name" placeholder="Name" value="{{ old('name') }}"
+                                        <input type="text" name="name" id="name" placeholder="Name" value="{{ $user->name }}"
                                                class="form-control @error('name') is-invalid @enderror"/>
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -27,36 +28,9 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" placeholder="Email" value="{{ old('email') }}"
+                                        <input type="email" name="email" id="email" placeholder="Email" value="{{ $user->email }}"
                                                class="form-control @error('email') is-invalid @enderror"/>
                                         @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" placeholder="Password"
-                                               class="form-control @error('password') is-invalid @enderror"/>
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="password_confirm">Confirm Password</label>
-                                        <input type="password" name="password_confirm" id="password_confirm"
-                                               placeholder="Password Confirm"
-                                               class="form-control @error('password_confirm') is-invalid @enderror"/>
-                                        @error('password_confirm')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -71,9 +45,9 @@
                                         <select id="profile" name="profile"
                                                 class="form-control @error('profile') is-invalid @enderror">
                                             <option value="">Select Profile</option>
-                                            <option value="Administrator" {{ old('profile') === 'Administrator' ? 'selected' : '' }}>Administrator</option>
-                                            <option value="Seller" {{ old('profile') === 'Seller' ? 'selected' : '' }}>Seller</option>
-                                            <option value="Special" {{ old('profile') === 'Special' ? 'selected' : '' }}>Special</option>
+                                            <option value="Administrator" {{ $user->profile === 'Administrator' ? 'selected' : '' }}>Administrator</option>
+                                            <option value="Seller" {{ $user->profile === 'Seller' ? 'selected' : '' }}>Seller</option>
+                                            <option value="Special" {{ $user->profile === 'Special' ? 'selected' : '' }}>Special</option>
                                         </select>
                                         @error('profile')
                                         <span class="invalid-feedback" role="alert">
@@ -82,13 +56,13 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>Photo</label>
                                         <div class="custom-file">
                                             <input type="file"
                                                    class="custom-file-input @error('photo') is-invalid @enderror"
-                                                   name="photo" id="photo" value="{{ old('photo') }}">
+                                                   name="photo" id="photo" value="{{ $user->photo }}">
                                             <label class="custom-file-label" for="photo">Choose Photo</label>
                                             @error('photo')
                                             <span class="invalid-feedback" role="alert">
@@ -98,9 +72,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-2">
+                                    <img src="{{ asset($user->photo) }}" width="100%" alt="image">
+                                    <p class="text-center"><small>Current Photo</small></p>
+                                </div>
                             </div>
-                            <div>
-                                <button type="submit" class="btn btn-success float-right">ADD</button>
+                            <div class="mt-3">
+                                <button type="submit" class="btn btn-success float-right">UPDATE</button>
                                 <button type="reset" class="btn btn-dark float-left">CANCEL</button>
                             </div>
                         </form>
