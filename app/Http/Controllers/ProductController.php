@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -60,35 +62,55 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return null
      */
     public function show(Product $product)
     {
-        //
+        return null;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return View
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit')->with('product', $product);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @param UpdateProductRequest $request
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->update([
+            'code' => $request->code,
+            'description' => $request->description,
+            'category_id' => $request->category,
+            'stock' => $request->stock,
+            'buying_price' => $request->buying_price,
+            'selling_price' => $request->selling_price
+        ]);
+
+        $file = $request->file('image');
+        if (!is_null($file)) {
+            $fileName = $file->getCTime() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads/products', $fileName);
+
+            $product->update([
+                'image' => $path
+            ]);
+        }
+
+        Session::put('status', 'Product update successfully');
+        return Redirect::route('products.index');
     }
 
     /**
