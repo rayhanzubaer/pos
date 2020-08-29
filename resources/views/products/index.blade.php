@@ -48,7 +48,7 @@
                                     </td>
                                     <td>{{ $product->code }}</td>
                                     <td>{{ $product->description }}</td>
-                                    <td>{{ $product->category_id }}</td>
+                                    <td>{{ $product->category->name }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td>{{ $product->buying_price }}</td>
                                     <td>{{ $product->selling_price }}</td>
