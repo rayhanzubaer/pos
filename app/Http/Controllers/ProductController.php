@@ -109,7 +109,7 @@ class ProductController extends Controller
             ]);
         }
 
-        Session::put('status', 'Product update successfully');
+        Session::flash('status', 'Product update successfully');
         return Redirect::route('products.index');
     }
 
@@ -122,7 +122,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        Session::put('status', 'Product deleted successfully');
+        Session::flash('status', 'Product deleted successfully');
         return Redirect::route('products.index');
     }
 }
