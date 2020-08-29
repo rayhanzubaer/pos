@@ -52,8 +52,8 @@
                                     <td>{{ $product->stock }}</td>
                                     <td>{{ $product->buying_price }}</td>
                                     <td>{{ $product->selling_price }}</td>
-                                    <td>{{ $user->created_at->diffForHumans() }}</td>
-                                    <td>{{ $user->updated_at->diffForHumans() }}</td>
+                                    <td>{{ $product->created_at->diffForHumans() }}</td>
+                                    <td>{{ $product->updated_at->diffForHumans() }}</td>
                                     <td>
                                         <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
                                                 data-toggle="dropdown" aria-expanded="false">
