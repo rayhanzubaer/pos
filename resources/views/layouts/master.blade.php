@@ -112,7 +112,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../gallery.html" class="nav-link">
+                        <a href="{{ \Illuminate\Support\Facades\URL::route('customers.index') }}" class="nav-link">
                             <i class="nav-icon far fa-user"></i>
                             <p>
                                 Customers
