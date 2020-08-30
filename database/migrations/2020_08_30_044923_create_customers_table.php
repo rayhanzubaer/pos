@@ -21,8 +21,8 @@ class CreateCustomersTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->date('birthdate');
-            $table->integer('total_purchase');
-            $table->dateTime('last_purchase');
+            $table->integer('total_purchase')->nullable();
+            $table->dateTime('last_purchase')->nullable();
             $table->timestamps();
         });
     }
