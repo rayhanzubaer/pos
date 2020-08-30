@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Http\Requests\StoreCustomerRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class CustomerController extends Controller
@@ -32,12 +36,21 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  StoreCustomerRequest  $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreCustomerRequest  $request)
     {
-        //
+        $customer = new Customer();
+        $customer->name = $request->name;
+        $customer->id_document = $request->id_document;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->birthdate = $request->birthdate;
+        $customer->save();
+        Session::flash('status', 'Customer created successfully');
+        return Redirect::route('customers.index');
     }
 
     /**
