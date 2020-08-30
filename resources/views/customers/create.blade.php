@@ -80,7 +80,7 @@
                                     <div class="form-group">
                                         <label for="birthdate">Birth Date</label>
                                         <input type="text" name="birthdate" id="birthdate" class="form-control @error('birthdate') is-invalid @enderror" placeholder="Birth Date"
-                                               data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                               data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                         @error('birthdate')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
