@@ -33,18 +33,22 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ asset(\Illuminate\Support\Facades\Auth::user()->photo) }}" class="user-image img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset(\Illuminate\Support\Facades\Auth::user()->photo) }}"
+                         class="user-image img-circle elevation-2" alt="User Image">
                     <span class="d-none d-md-inline">{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
                     <li class="user-header bg-primary">
-                        <img src="{{ asset(\Illuminate\Support\Facades\Auth::user()->photo) }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset(\Illuminate\Support\Facades\Auth::user()->photo) }}"
+                             class="img-circle elevation-2" alt="User Image">
 
                         <p>
 
-                            {{ \Illuminate\Support\Facades\Auth::user()->name }} - {{ \Illuminate\Support\Facades\Auth::user()->profile }}
-                            <small>Member since {{ \Illuminate\Support\Facades\Auth::user()->created_at->diffForHumans() }}</small>
+                            {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                            - {{ \Illuminate\Support\Facades\Auth::user()->profile }}
+                            <small>Member
+                                since {{ \Illuminate\Support\Facades\Auth::user()->created_at->diffForHumans() }}</small>
                         </p>
                     </li>
                     <!-- Menu Footer-->
